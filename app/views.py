@@ -80,5 +80,13 @@ def get_contests_user(user_id):
 
 @app.get('/users/leaderboard')
 def sorted_list_of_users():
-    data = request.json
-    
+    type_response = request.json['type']
+    type_of_sorting = request.json['sort']
+    result = models.User.leaderboard(DATA['users'], type_of_sorting)
+    if type_response == 'list':
+        return Response(json.dumps(
+            {'users': [user.data() for user in result]}
+        ), 200, mimetype='application/json')
+    elif type_response == 'graph':
+        pass
+    return Response(status=400)
