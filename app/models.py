@@ -1,5 +1,6 @@
 # models.py
 from validate_email import validate_email
+from graphics_module import graph
 from json import dumps
 
 
@@ -39,7 +40,7 @@ class User:
         return validate_email(email)
 
     @staticmethod
-    def leaderboard(users, types_of_sorting='asc'):
+    def leaderboard(users, types_of_sorting="asc"):
         # создаём словарь с ключом - id пользователя и value - количество соревнований
         usersDict = dict()
         for user in users:
@@ -54,13 +55,13 @@ class User:
                     result.append(user)
                     users_array.remove(user)
                     break
-        if types_of_sorting == 'desc':
+        if types_of_sorting == "desc":
             return result[::-1]
         return result
-        # создаём вложенный цикл for. в первом цикле все id, а во втором отсортированный список количесв соревнований
-        # если у пользователя с данным id совпадаем количество конкурсов с превым числом в отсортированном списке то его id попадает на первую позищию в конечном списке id-шников
-        # и так далее, пока всех пользователей(а точнее id-шники) не получат своё положение в списке относительно количества конкурсов
-        # в зависимости от требования requesta вернём конечный список в порядке возрастания или убывания.
+
+    @staticmethod
+    def creating_graph(users):
+        graph(users)
 
 
 class Contest:
